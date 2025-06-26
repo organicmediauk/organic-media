@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Motivation</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quote-box {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .quote {
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+    .author {
+      margin-top: 10px;
+      color: #4f46e5;
+      font-weight: bold;
+    }
+    .time {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .share-btn {
+      margin-top: 16px;
+      background: #4f46e5;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="quote-box">
+    <h2>Daily Motivation</h2>
+    <div id="quote" class="quote">Loading...</div>
+    <div id="author" class="author"></div>
+    <div id="nextUpdate" class="time"></div>
+    <button id="shareBtn" class="share-btn">Share Quote</button>
+  </div>
+
+  <script>
+    const quotes = [
+      { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" }
+    ];
+
+    function getDailyQuote() {
+      const today = new Date();
+      const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+      return quotes[dayOfYear % quotes.length];
+    }
+
+    function updateNextQuoteTime() {
+      const now = new Date();
+      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      const diff = tomorrow - now;
+      const hrs = Math.floor(diff / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      document.getElementById('nextUpdate').textContent = `Next quote in ${hrs}h ${mins}m`;
+    }
+
+    function displayQuote() {
+      const quoteObj = getDailyQuote();
+      document.getElementById('quote').textContent = `"${quoteObj.text}"`;
+      document.getElementById('author').textContent = `— ${quoteObj.author}`;
+      updateNextQuoteTime();
+    }
+
+    document.getElementById('shareBtn').addEventListener('click', function() {
+      const quote = document.getElementById('quote').textContent;
+      const author = document.getElementById('author').textContent;
+      const text = `${quote} ${author}`;
+      if (navigator.share) {
+        navigator.share({ title: 'Daily Motivation', text }).catch(() => fallbackShare(text));
+      } else {
+        fallbackShare(text);
+      }
+    });
+
+    function fallbackShare(text) {
+      const input = document.createElement('textarea');
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      alert('Quote copied to clipboard!');
+    }
+
+    displayQuote();
+    setInterval(updateNextQuoteTime, 60000);
+  </script>
+</body>
+</html>
