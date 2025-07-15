@@ -4,25 +4,30 @@
   <meta charset="UTF-8">
   <title>Daily Motivation</title>
   <style>
-    html, body {
-      font-family: sans-serif;
-      background: none;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100%;
-    }
-    .quote-box {
-      background: rgba(239, 238, 232, 0.9);
-      border-radius: 16px;
-      padding: 24px;
-      max-width: 600px;
-      width: calc(100% - 40px);
-      margin: 20px auto;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
+   html, body {
+  font-family: sans-serif;
+  background: none;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quote-box {
+  background: rgba(239, 238, 232, 0.9);
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
     .quote {
       font-size: 1.25rem;
       font-style: italic;
