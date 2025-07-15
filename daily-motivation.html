@@ -4,29 +4,39 @@
   <meta charset="UTF-8">
   <title>Daily Motivation</title>
   <style>
-    body {
+    html, body {
       font-family: sans-serif;
-      background: linear-gradient(135deg, #ff8255, #e8ac97);
+      background: none;
       color: #333;
       margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
     }
     .quote-box {
       background: rgba(239, 238, 232, 0.9);
       border-radius: 16px;
       padding: 24px;
       max-width: 600px;
-      width: 100%;
+      width: calc(100% - 40px);
+      margin: 20px auto;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
-    .quote { font-size: 1.25rem; font-style: italic; }
-    .author { margin-top: 10px; color: #ff8255; font-weight: bold; }
-    .time { margin-top: 10px; font-size: 0.85rem; color: #666; }
+    .quote {
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+    .author {
+      margin-top: 10px;
+      color: #ff8255;
+      font-weight: bold;
+    }
+    .time {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #666;
+    }
     .share-btn {
       margin-top: 16px;
       background: #ff8255;
@@ -36,6 +46,17 @@
       border-radius: 50px;
       cursor: pointer;
     }
+  </style>
+</head>
+<body>
+  <div class="quote-box">
+    <div class="quote">"The best way to predict the future is to create it."</div>
+    <div class="author">– Peter Drucker</div>
+    <div class="time">Monday, July 14</div>
+    <button class="share-btn">Share</button>
+  </div>
+</body>
+</html>
   </style>
 </head>
 <body>
