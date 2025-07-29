@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Org Chart</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #fff;
+    }
+    #wrapper {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      cursor: grab;
+    }
+    #chart {
+      display: block;
+      max-width: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: auto;
+    }
+    /* Disable right-click */
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;"> <!-- disables right-click -->
+
+  <div id="wrapper">
+    <img id="chart" src="org-chart.png" alt="Company Org Chart" />
+  </div>
+
+  <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
+  <script>
+    const element = document.getElementById('chart');
+    const panzoom = Panzoom(element, {
+      maxScale: 5,
+      minScale: 0.5,
+      contain: 'outside',
+    });
+
+    const wrapper = document.getElementById('wrapper');
+    wrapper.addEventListener('wheel', panzoom.zoomWithWheel);
+  </script>
+
+</body>
+</html>
